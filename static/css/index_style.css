@@ -1,0 +1,144 @@
+/*                               Sección para NavBar                                 */
+/*///////////////////////////////////////////////////////////////////////////////////*/
+/* Formato Nav Bar */
+#nav-container{
+    background-color: #fcfbf8;
+    border-color: #fcfbf8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+/* Formato para navbar brand */
+.logo{
+    width: 70px;
+    height: auto;
+    filter: sepia(80%);
+    margin-left: 30px;
+}
+
+.nav-section{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #92683C;
+    border-top-style: solid;
+    border-top-width: 0px;
+    border-top-color: #92683C;
+}
+
+/* Formato para navbar on hover */
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color: #92683C;
+}
+
+/* Texto menu */
+.navbar-default .navbar-nav > li > a {
+    color: #1C1F21;
+    font-family: "ITC Century W01 Book",Georgia ,serif;
+    font-weight: 100%;
+    line-height: 1.5em;
+    font-size: 2.5rem;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+/* Color texto menu on hover */
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #92683C ;
+}
+
+/* Color texto y background menú seleccionado */
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+    color: #92683C;
+    background-color: #fcfbf8 ;
+}
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+/*                               Sección para Footer                                 */
+/*///////////////////////////////////////////////////////////////////////////////////*/
+.footer{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #3f3f3f;
+    color:darkgrey;
+    text-align: center;
+}
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+/*                               Sección para Carousel                               */
+/*///////////////////////////////////////////////////////////////////////////////////*/
+/* Modificar propiedades del carousel */
+#myCarousel{
+    width: 70%;
+    height: auto;
+    margin-left: 15%;
+    margin-right: 20%
+}
+
+.carousel-text{
+    background-color: white ;
+    opacity: .7;
+    font-size: 40px;
+    color: black;
+}
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+/*                               Sección para Cuerpo                                 */
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+.br-horizontal{
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #92683C;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: 2px;
+}
+
+/* Formato contenedor info */
+.info , .div-quick-stats{
+    background-color: #fcfbf8;
+    color: #1C1F21;
+    font-family: "ITC Century W01 Book",Georgia ,serif;
+    padding-left: 30px;
+    padding-top: 30px;
+}
+
+.section-title{
+    text-align: center;
+}
+
+/* Resizing de la imagen que contiene la arquitectura */
+.arqui{
+    width: 100%;
+    height: auto;
+}
+
+/* Formato Cuerpo de la Página */
+body{
+    /* background-image: url(https://static.codepen.io/assets/global/texture-codepen-2-d817063398aa9a2b534f3834f8533e2bae759c25933b86cdd149d9f0cc38563d.png); */
+    /*background-color: #040404*/
+    background-color: #fcfbf8
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Strategic Chess Player - Statistics</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        .footer{
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #EEEEEE;
+            color:darkgrey;
+            text-align: center;
+        }
+
+    </style>
+
+    <script>
+        $( function() {
+            $( "#slider-range" ).slider({
+            range: true,
+            min: 1,
+            max: 633,
+            values: [ 1, 833 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val(  ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+                slider(ui.values)
+            }
+            });
+            $( "#amount" ).val(  $( "#slider-range" ).slider( "values", 0 ) +
+            " - " + $( "#slider-range" ).slider( "values", 1 ) );
+        } );
+    </script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SCP</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li> <a href="/">Home</a> </li>
+                <li> <a href="/load">Load Game</a> </li>
+                <li> <a href="/svg_test">Play Game</a>  </a> </li>
+                <li class="active" > <a href="/statistics">Statistics</a>  </a> </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container-fluid" >   
+
+        <div class="c-controles" id="id-controles" >
+            <div class="row" >
+                <div class="col-xs-7 col-xs-offset-1" >
+                    <p id="p-slider">
+                        <label for="amount">Game turn range:</label>
+                        <input type="text" id="amount" readonly style="border:0; color:rgb(0, 0, 0); font-weight:bold;">
+                    </p>
+                    <div id="slider-range"></div>
+                </div>
+
+                <div class="col-xs-1" >
+                    <label for="selPlayer">Player</label>
+                    <select id="selPlayer" class="form-control">
+                        <option>All</option>
+                        <option>Machine 1</option>
+                        <option>Machine 2</option>
+                        <option>Machine 3</option>
+                        <option>Machine 4</option>
+                        <option>Machine 5</option>
+                        <option>Machine 6</option>
+                        <option>Humano</option>
+                    </select>
+                </div>
+
+                <div class="col-xs-1" >
+                    <label for="selDepth">Depth</label>
+                    <select id="selDepth" class="form-control">
+                        <option>All</option>
+                        <option>Depth 0</option>
+                        <option>Depth 1</option>
+                        <option>Depth 2</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div id="img-5" ></div>
+        <div id="img-4" ></div>
+        <div id="img-3"></div>
+        <div id="img" ></div>
+        <div id="img-2" ></div>
+    </div>
+
+    <div class="footer">
+        <h4 style="margin-bottom:0px;padding-bottom: 15px;padding-top: 15px;margin-top: 0px;" > © Rulo & Company 2019. All rights reserved. </h4>
+    </div>
+    <script src="{{ url_for('static', filename='js/statistics_js.js') }}"></script>
+</body>
+
+</html>

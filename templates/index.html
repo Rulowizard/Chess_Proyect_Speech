@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>Strategic Chess Player - Home</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/index_style.css')}}" >
+
+</head>
+
+<body>
+    <div class="container-fluid"  >
+        <div class="nav-section" >     
+            <nav class="navbar navbar-default" id="nav-container" >  
+                <div class="navbar-header">
+                    <img class="logo" src="https://i.pinimg.com/564x/e8/7a/a6/e87aa608dbe177820bd6d0d65670edeb.jpg" >
+                </div>
+                <ul class="nav navbar-nav" >
+                    <li class="active" > <a href="/" >Home</a> </li>
+                    <li> <a href="/load" >Load Game</a> </li>
+                    <li> <a href="/svg_test">Play Game</a>  </a> </li>
+                    <li> <a href="/statistics">Statistics</a>  </a> </li>
+                </ul>
+            </nav>
+        </div>
+    </div>  
+
+    <br>
+
+    <div class="container-fluid">
+
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" >
+            
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
+                <li data-target="#myCarousel" data-slide-to="4"></li>
+
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="item active"  >
+                    <img src="" style="width:100%;" id="img1" >
+                    <div class="carousel-caption" >
+                        <a id="c1" class="carousel-text" ></a>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="" style="width:100%;" id="img2">
+                    <div class="carousel-caption" >
+                        <a id="c2" class="carousel-text" ></a>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="" style="width:100%;" id="img3">
+                    <div class="carousel-caption" >
+                        <a id="c3" class="carousel-text" ></a>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="" style="width:100%;" id="img4">
+                    <div class="carousel-caption" >
+                        <a id="c4" class="carousel-text" ></a>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="" style="width:100%;" id="img5">
+                    <div class="carousel-caption" >
+                        <a id="c5" class="carousel-text" ></a>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+
+        </div>
+    </div>
+
+    <br>
+    <div class="br-horizontal" ></div>
+    <br>
+
+
+    <div class="container-fluid" >
+        <div class="row" >
+            <div class="col-xs-8" >
+                <div class="info" >
+                    <h1 class="section-title">About</h1>
+                    <br>
+                    <h3 class="section-subtitle">Previous Work</h3>
+                    <p>The present web page is the continuation of the previous chess project. That project focused on creating a program capable of playing a match of chess; from this point on we will refer to it as the "chess engine". The chess engine incorporated five machine players and a human interface. Depending on the version of the machine player, the engine would consider different variables to decide the optimal play. The most advanced version of the machine player incorporates a Mini-Max algorithm. The mini-max algorithm lets the machine player to "see" what the oponent will do and react to its actions.</p>
+                    <br>
+                    <h3 class="section-subtitle">Chess Website</h3>
+                    <p>The goal for the second part of the project was to create a web page capable of hosting the chess engine. The web page includes the following functionalities:  </p>
+                    <li>A flask application that will host the web page and control the flow of the chess game</li>
+                    <li>A connection to MySQL and MongoDB</li>
+                    <li>Web scrapping to obtain news related to chess</li>
+                    <li>Graphics to show information about the games played</li>
+                    <br>
+                    <p>The next image contains a graphical representation of the different pieces of code that work together to operate the web page. Also, it shows how the information travels between programs.</p>
+                </div>
+            </div>
+
+            <div class="col-xs-4"  >
+                <div class="div-quick-stats" id="quick-stats" >
+                    <h1 class="section-title"  >Quick Statistics</h1>
+                    <br>
+                    <p> Saved games: {{numb_games}}  </p>
+                    <br>
+                </div>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="row" >
+            <div class="col-xs-6 col-xs-offset-3" >
+                <div class="img" >
+                        <img src="https://i.ibb.co/bKNhHsb/arqui-resize.jpg" alt="Arquitectura" class="arqui" >
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <h4 style="margin-bottom:0px;padding-bottom: 15px;padding-top: 15px;margin-top: 0px;" > © Rulo & Company 2019. All rights reserved. </h4>
+    </div>
+
+
+
+    <script src="{{ url_for('static', filename='js/index_js.js') }}"></script>
+
+</body>
+
+</html>

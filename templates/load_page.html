@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Strategic Chess Player - Load</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+
+
+    <style>
+        .h-paneles{
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .p-li{
+            margin-left: 8%;
+        }
+
+        .panel-body{
+            background-color: #EEEEEE;
+        }
+
+        .svg-img{
+            margin-left: 10%;
+        }
+
+        .footer{
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #EEEEEE;
+            color:darkgrey;
+            text-align: center;
+        }
+
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SCP</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li> <a href="/">Home</a> </li>
+                <li class="active" > <a href="/load">Load Game</a> </li>
+                <li> <a href="/svg_test">Play Game</a>  </a> </li>
+                <li> <a href="/statistics">Statistics</a>  </a> </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container-fluid" >
+
+        <div class="container text-center">
+            <h1 class="jumbotron" >Load Game</h1>
+        </div>
+
+        <div class="col-xs-8 col-xs-offset-2" >
+            <div id="paneles"></div>
+        </div>        
+        
+        
+    </div>
+
+    <div class="footer">
+        <h4 style="margin-bottom:0px;padding-bottom: 15px;padding-top: 15px;margin-top: 0px;" > © Rulo & Company 2019. All rights reserved. </h4>
+    </div>
+
+
+
+
+
+    <script src="{{ url_for('static', filename='js/load_js.js') }}"></script>
+</body>
+
+</html>

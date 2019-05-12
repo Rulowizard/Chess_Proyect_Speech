@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Strategic Chess Player - Play</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript"></script>
+
+    <style>
+        .titulo{
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .stat-text{
+            font-size: 20px;
+        }
+
+        .footer{
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #EEEEEE;
+            color:darkgrey;
+            text-align: center;
+        }
+
+        .in-panel{
+            margin-left:5%;
+            margin-right: 5%;
+        }
+
+        .panel-body{
+            background-color: #EEEEEE;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    
+    <div class="container-fluid">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">SCP</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li> <a href="/">Home</a> </li>
+                <li> <a href="/load">Load Game</a> </li>
+                <li class="active" > <a href="/svg_test">Play Game</a>  </a> </li>
+                <li> <a href="/statistics">Statistics</a>  </a> </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container-fluid" id="container-game-1" >
+
+        <div class="container text-center">
+            <h1 class="jumbotron" >Play Game</h1>
+        </div>
+
+        <div class="row">
+
+            <div class="col-xs-3 col-xs-offset-1" >
+                <div class="panel panel-default">            
+                    <div class="panel-body" >
+                        <div class="row">
+                            <div class="in-panel">
+                                <label for="selPlayer1">Player #1</label>
+                                <select id="selPlayer1" class="form-control">
+                                    <option>Maquina 1</option>
+                                    <option>Maquina 2</option>
+                                    <option>Maquina 3</option>
+                                    <option>Maquina 4</option>
+                                    <option>Maquina 5</option>
+                                    <option>Maquina 6</option>
+                                    <option>Humano</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row" >
+                            <div class="in-panel" >
+                                <label for="depth1">Depth Player #1</label>
+                                <select id="depth1" class="form-control" >
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-3 col-xs-offset-1" >
+                <div class="panel panel-default" >
+                    <div class="panel-body" >
+                        <div class="row" >
+                            <div class="in-panel">
+                                <label for="selPlayer2">Player #2</label>
+                                <select id="selPlayer2" class="form-control">
+                                    <option>Maquina 1</option>
+                                    <option>Maquina 2</option>
+                                    <option>Maquina 3</option>
+                                    <option>Maquina 4</option>
+                                    <option>Maquina 5</option>
+                                    <option>Maquina 6</option>
+                                    <option>Humano</option>
+                                </select>
+                            </div> 
+                        </div>
+                        <div class="row" >
+                            <div class="in-panel" >
+                                <label for="depth2">Depth Player #2</label>
+                                <select id="depth2" class="form-control" >
+                                    <option>0</option>
+                                    <option>1</option>
+                                    <option>2</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-2 col-xs-offset-1">
+                <div class="panel panel-default" >
+                    <div class="panel-body" >
+                        <div class="row" >
+                            <div class="col-xs-1 col-xs-offset-1">
+                                    <button id="play" type="submit" class="btn btn-default">Play</button>
+                            </div>
+                            <div class="col-xs-1 col-xs-offset-3">
+                                <button id="game" type="submit" class="btn btn-default">Game</button>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row"  >
+                            <div class="col-xs-1 col-xs-offset-1">
+                                    <button id="restart" type="submit" class="btn btn-default">Restart</button>
+                                </div>
+                                <div class="col-xs-1 col-xs-offset-3">
+                                    <button id="save" type="submit" class="btn btn-default">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            
+
+            
+
+        </div>
+
+        <br>
+        <br>
+        <br>
+        <div class="row" id="row-svg">
+            <div class="col-xs-4 col-xs-offset-2" id="col-svg" >
+                <div class="contenedor-svg" >
+                    <div id="svg" class="svg-img" ></div>
+                </div>
+            </div>
+            <div class="col-xs-5" >
+                <div id="contenedor-text"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <h4 style="margin-bottom:0px;padding-bottom: 15px;padding-top: 15px;margin-top: 0px;" > © Rulo & Company 2019. All rights reserved. </h4>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/chess_js.js') }}"></script>
+</body>
+
+</html>
