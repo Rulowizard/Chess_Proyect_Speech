@@ -17,6 +17,8 @@ var msg="";
 var result="";
 //Variable que guarda el id del juego
 var game_id = "";
+//Variable que guarda si ya se dijo la palabra "activate"
+var activate = 0;
 
 
 //Inicializa en el lado del servidor un tablero nuevo
@@ -314,33 +316,6 @@ function getCoordinates(){
 
   x_norm = pageX - 40- Math.ceil(parseInt(style_col.marginLeft.slice(0,-2)))
   y_norm = pageY - 507
-  
-  /*
-  console.log("------------------------------")
-
-  console.log("Page X(Left): "+String(pageX )  )
-  console.log("Col margin left " + String( Math.ceil(parseInt(style_col.marginLeft.slice(0,-2)))  ) )
-  console.log("X normalized: " + String( x_norm )  )
-  console.log("Cudrante X: " + String( Math.ceil( x_norm /56.25)  ) )
-
-  console.log("---")
-  console.log("Page Y(Top): "+String(pageY)  )
-  console.log("This Offset Top: "+String(this.offsetTop)  )
-  console.log("Col margin top " +  String(  style_col.marginTop ) )
-
-
-  //console.log("Row margin left " + style_row.marginLeft )
-  //console.log("Offsetleft row: " + String(row_svg.offsetLeft) )
-  //console.log("Row margin+border+padding: " + String( row_svg.marginLeft) )
-  //console.log("Offset left col: " +String(col_svg.offsetLeft) )
-  //console.log("Page Y(Top): "+String(pageY)  )
-  //console.log("This Offset Left: "+String(this.offsetLeft )  )
-  //console.log("This Offset Top: "+String(this.offsetTop)  )
-
-  console.log("------------------------------")
-  */
-
-  //LINEA DE PRUEBA
   transformCoordinates( [x_norm , y_norm ]  );
 }
 
@@ -441,6 +416,9 @@ async function game(){
           game();
         }
 
+      }else{
+        detectActivate();
+
       }   
     } else{
       var tipo_jug_serv = serverSelPlayer(tipo_jugador)
@@ -488,6 +466,35 @@ function save(){
 
 initialize();
 handleSubmit()
+
+function detectActivate(){
+  p = d3.select("#activate_status")
+  p.text("Escuchando")
+  $.get("detect_activate",function(data){
+    console.log(data)
+    console.log( data.length )
+    if( data.includes("1") ){
+      var circulo_activate = d3.select("#circle_activate")
+      circulo_activate.attr("fill","green")
+      p = d3.select("#activate_status")
+      p.text("Desactivado")
+    }else{
+      p = d3.select("#activate_status")
+      p.text("Desactivado")
+      detectActivate()
+    }
+  });
+}
+
+function detectWords(){
+  $.get("detect_words",function(data){
+    console.log(data)
+    console.log( data.length )
+  });
+}
+
+detectWords();
+
 
 // Add event listener for submit button
 d3.select("#submit").on("click", handleSubmit);

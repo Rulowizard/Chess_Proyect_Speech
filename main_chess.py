@@ -6,17 +6,56 @@ import chess
 
 from sqlalchemy import create_engine
 import pymysql
-pymysql.install_as_MySQLdb()
-
-import pandas as pd
-
-engine = create_engine ("mysql://root:Aa1$0110m@localhost/chess_db")
 
 from chess_engine import ( boardSVGRepr, initialize_game, 
     call_jugador_v4, global_board, global_turn, process_play, jugador_v1, jugador_v2,
     jugador_v3, jugador_v4, jugador_v5, get_move, fen_representation, initialize_game_fen,
     jugador_v6)
 
+from chess_speech import record_activate , record_words
+
+import pandas as pd
+
+pymysql.install_as_MySQLdb()
+
+engine = create_engine ("mysql://root:Aa1$0110m@localhost/chess_db")
+
+
+
+import numpy as np
+import time
+from pydub import AudioSegment
+import random
+import sys
+import io
+import os
+import glob
+from td_utils import *
+import matplotlib.mlab as mlab
+import matplotlib.pyplot as plt
+
+from scipy.io.wavfile import write
+
+import pyaudio
+from queue import Queue
+from threading import Thread
+import sys
+
+from keras.callbacks import ModelCheckpoint
+from keras.models import Model, load_model, Sequential
+from keras.layers import Dense, Activation, Dropout, Input, Masking, TimeDistributed, LSTM, Conv1D
+from keras.layers import GRU, Bidirectional, BatchNormalization, Reshape
+from keras.optimizers import Adam
+
+model_act = load_model('./models/tr_model.h5')
+model_m = load_model('./models/move_trained_model_3.h5')
+model_1 = load_model('./models/one_trained_model_3.h5')
+models = [model_m, model_1]
+
+
+timeout = time.time() + 4  # 4s from now
+record_activate(timeout , model_act) 
+record_words(timeout,models)
 
 # Create an instance of Flask
 app = Flask(__name__)  
@@ -27,8 +66,6 @@ client = pymongo.MongoClient(conn)
 db = client.chess
 
 #Global Variables
-
-
 global flagLoadGame
 flagLoadGame=False
 global globalFEN
@@ -372,8 +409,17 @@ def player():
         values = process_play( jugador_v6(board,color,depth)  ,"M6", depth , game_id )
     return jsonify(values)
 
+@app.route("/detect_activate", methods=["GET"])
+def detect_activate():
+    timeout = time.time() + 4  # 4s from now
+    values = record_activate(timeout , model_act) 
+    return jsonify(values) 
 
-
+@app.route("/detect_words", methods=["GET"])
+def detect_words():
+    timeout = time.time() + 4  # 4s from now
+    values = record_words(timeout , models) 
+    return jsonify(values) 
 
 if __name__ == "__main__":
     app.run(debug=True)
