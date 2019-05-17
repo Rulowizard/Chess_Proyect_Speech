@@ -12,7 +12,8 @@ from chess_engine import ( boardSVGRepr, initialize_game,
     jugador_v3, jugador_v4, jugador_v5, get_move, fen_representation, initialize_game_fen,
     jugador_v6)
 
-from chess_speech import record_activate , record_words
+from chess_speech import (record_activate , record_words, get_movements, clean_movements,
+    grabar_audio)
 
 import pandas as pd
 
@@ -55,7 +56,7 @@ models = [model_m, model_1]
 
 timeout = time.time() + 4  # 4s from now
 record_activate(timeout , model_act) 
-record_words(timeout,models)
+record_words(models)
 
 # Create an instance of Flask
 app = Flask(__name__)  
@@ -415,11 +416,90 @@ def detect_activate():
     values = record_activate(timeout , model_act) 
     return jsonify(values) 
 
+@app.route("/record_audio",methods=["GET"])
+def record_audio():
+    resultado = grabar_audio()
+    return jsonify(resultado)
+
 @app.route("/detect_words", methods=["GET"])
 def detect_words():
-    timeout = time.time() + 4  # 4s from now
-    values = record_words(timeout , models) 
-    return jsonify(values) 
+    i=0
+    #Regresa arreglos, podrían ser de diferentes tamaños
+    values = record_words(models)
+    #Obtengo la longitud del arreglo más largo
+    max_len = len( max( values, key=len ) ) 
+    #Primer incidencia de "move" detectado
+    if "1" in values[0]:
+        first = values[0].index("1")
+        #Ajusto el largo de todos los arreglos
+        for value in values:
+            #Si la longitud del arreglo es menor lo arreglo
+            if len(value)<max_len:
+                while len(value) < max_len:
+                    value.append("-")
+            
+            if i==1:
+                a= clean_movements(first,value,"a")
+            if i==2:
+                b= clean_movements(first,value,"b")
+            if i==3:
+                c= clean_movements(first,value,"c")
+            if i==4:
+                d= clean_movements(first,value,"d")
+            if i==5:
+                e= clean_movements(first,value,"e")
+            if i==6:
+                f= clean_movements(first,value,"f")
+            if i==7:
+                g= clean_movements(first,value,"g")
+            if i==8:
+                h= clean_movements(first,value,"h")
+
+            if i==9:
+                one = clean_movements(first,value,"1")
+            if i==10:
+                two = clean_movements(first,value,"2")
+            if i==11:
+                three = clean_movements(first,value,"3")
+            if i==12:
+                four = clean_movements(first,value,"4")
+            if i==13:
+                five = clean_movements(first,value,"5")
+            if i==14:
+                six = clean_movements(first,value,"6")
+            if i==15:
+                seven = clean_movements(first,value,"7")
+            if i==16:
+                eigth = clean_movements(first,value,"8")
+
+            i=i+1
+        
+        movements_a = list( set(get_movements(a,"a")))
+        print(movements_a)
+        movements_b = list( set(get_movements(b,"b")))
+        movements_c = list( set(get_movements(c,"c")))
+        movements_d = list( set(get_movements(d,"d")))
+        movements_e = list( set(get_movements(e,"e")))
+        movements_f = list( set(get_movements(f,"f")))
+        movements_g = list( set(get_movements(g,"g")))
+        movements_h = list( set(get_movements(h,"h")))
+
+        unique_movements = movements_a+movements_b+movements_c+movements_d+movements_e \
+            + movements_f+ movements_g + movements_h
+        unique_movements = list( set(unique_movements) )
+
+        board = global_board()
+        legal_moves_uci =[move.uci() for move in board.legal_moves ]
+        
+
+        unique_movements = [ele for ele in unique_movements if ele in legal_moves_uci ]
+            
+        result=[ unique_movements]
+    else:
+        result=["NOK"]
+
+
+    return jsonify(result) 
 
 if __name__ == "__main__":
     app.run(debug=True)

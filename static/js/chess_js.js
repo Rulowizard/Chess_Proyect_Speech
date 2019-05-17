@@ -472,12 +472,12 @@ function detectActivate(){
   p.text("Escuchando")
   $.get("detect_activate",function(data){
     console.log(data)
-    console.log( data.length )
     if( data.includes("1") ){
       var circulo_activate = d3.select("#circle_activate")
       circulo_activate.attr("fill","green")
       p = d3.select("#activate_status")
       p.text("Desactivado")
+      recordAudio();
     }else{
       p = d3.select("#activate_status")
       p.text("Desactivado")
@@ -486,14 +486,29 @@ function detectActivate(){
   });
 }
 
-function detectWords(){
-  $.get("detect_words",function(data){
+function recordAudio(){
+  p = d3.select("#words_status")
+  p.text("Escuchando")
+  $.get("record_audio",function(data){
     console.log(data)
-    console.log( data.length )
+    if(data=="Ok"){
+      var circulo_words = d3.select("#circle_words")
+      circulo_words.attr("fill","green")
+      detectWords()
+    }
   });
 }
 
-detectWords();
+function detectWords(){
+  
+  $.get("detect_words",function(data){
+    console.log(data)
+
+  });
+  
+}
+
+
 
 
 // Add event listener for submit button
