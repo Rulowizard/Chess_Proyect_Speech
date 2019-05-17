@@ -16,37 +16,7 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script type="text/javascript"></script>
-
-    <style>
-        .titulo{
-            text-align: center;
-            text-decoration: underline;
-        }
-
-        .stat-text{
-            font-size: 20px;
-        }
-
-        .footer{
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            background-color: #EEEEEE;
-            color:darkgrey;
-            text-align: center;
-        }
-
-        .in-panel{
-            margin-left:5%;
-            margin-right: 5%;
-        }
-
-        .panel-body{
-            background-color: #EEEEEE;
-        }
-
-    </style>
-
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/test_svg_style.css')}}" >
 </head>
 
 <body>
@@ -170,42 +140,50 @@
         <br>
         <br>
         <div class="row" id="row-svg">
-            <div class="col-xs-4 col-xs-offset-2" id="col-svg" >
+
+            <div class="col-xs-3 " id="col-svg" >
                 <div class="contenedor-svg" >
                     <div id="svg" class="svg-img" ></div>
                 </div>
             </div>
-            <div class="col-xs-5" >
+
+            <div class="col-xs-3" >
+                <div id="contenedor-text"></div>
+            </div>
+
+            <div class="col-xs-3">
                 <div id="indicadores" >
                     <div class="row" >
-                        <div class="col-xs-5" >
-                            <p>RT Speech Recognition</p>
-                            <svg width="100" height="100">
-                                <circle id="circle_activate" cx="50%" cy="50%" r="25" fill="gray" > </circle>
-                            </svg>
-                            <p id="activate_status" ></p>
+                        <div class="col-xs-6" >
+                            <b>RT Speech Recognition</b>
+                            <p id="activate_status" >N/A</p>
+                            <div class="row" style=" height:60px;">
+                                <svg width="50" height="50" class="circles" >
+                                    <circle id="circle_activate" cx="50%" cy="50%" r="25" fill="gray" > </circle>
+                                </svg>
+                            </div>
                         </div>
-                        <div class="col-xs-5" >
-                            <p>Speech Recognition</p>
-                            <p id="words_status" ></p>
-                            <div class="row" >
-                                <svg width="100" height="100">
-                                    <circle id="circle_words" cx="5" cy="5" r="5" fill="gray" > </circle>
+                        <div class="col-xs-6" >
+                            <b>Speech Recognition</b>
+                            <p id="record_status" >N/A</p>
+                            <div class="row" style=" height:60px;" >
+                                <svg width="50" height="50" class="circles">
+                                    <circle id="circle_record" cx="50%" cy="50%" r="25" fill="gray" > </circle>
                                 </svg>
-                                <p>Test 1</p>
                             </div>
-                            <div class="row" >
-                                <svg width="100" height="100">
-                                    <circle id="circle_words" cx="50%" cy="50%" r="5" fill="gray" > </circle>
+                            <p id="words_status" >N/A</p>
+                            <div class="row" style=" height:60px;" >
+                                <svg width="50" height="50" class="circles">
+                                    <circle id="circle_words" cx="50%" cy="50%" r="25" fill="gray" > </circle>
                                 </svg>
-                                <p>Test 2</p>
                             </div>
-                            
-                            
                         </div>
                     </div>
                 </div>
-                <div id="contenedor-text"></div>
+            </div>
+
+            <div class="col-xs-2">
+                <div id="movements" class="overflow_auto" ></div>
             </div>
 
         </div>

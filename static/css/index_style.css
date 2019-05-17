@@ -3,6 +3,9 @@
 /* Formato Nav Bar */
 #nav-container{
     background-color: #fcfbf8;
+    /*
+    background-image: url(https://images.wallpaperscraft.com/image/texture_vintage_wall_background_dark_93580_1920x1080.jpg);
+    */
     border-color: #fcfbf8;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -55,7 +58,10 @@
 .navbar-default .navbar-nav > .active > a:hover,
 .navbar-default .navbar-nav > .active > a:focus {
     color: #92683C;
+    
     background-color: #fcfbf8 ;
+    
+
 }
 /*///////////////////////////////////////////////////////////////////////////////////*/
 
@@ -130,9 +136,12 @@
 
 /* Formato Cuerpo de la Página */
 body{
-    /* background-image: url(https://static.codepen.io/assets/global/texture-codepen-2-d817063398aa9a2b534f3834f8533e2bae759c25933b86cdd149d9f0cc38563d.png); */
-    /*background-color: #040404*/
-    background-color: #fcfbf8
+    /*
+    background-image: url(https://wallpaper.wiki/wp-content/uploads/2017/04/wallpaper.wiki-Free-Photos-Blue-Textured-PIC-WPC008998.jpg);
+    */
+    /*
+    background-image: url(https://images.wallpaperscraft.com/image/texture_vintage_wall_background_dark_93580_1920x1080.jpg);
+    */
 }
 
 

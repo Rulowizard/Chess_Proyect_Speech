@@ -1,0 +1,44 @@
+
+.titulo{
+    text-align: center;
+    text-decoration: underline;
+}
+
+.stat-text{
+    font-size: 20px;
+}
+
+.footer{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #EEEEEE;
+    color:darkgrey;
+    text-align: center;
+}
+
+.in-panel{
+    margin-left:5%;
+    margin-right: 5%;
+}
+
+.panel-body{
+    background-color: #EEEEEE;
+}
+
+.overflow_auto{
+    height: 485px;
+    overflow: auto;
+    padding-right: 5px;
+    padding-left: 5px;
+    text-align: center;
+}
+
+#indicadores{
+    text-align:-webkit-center;
+}
+
+.circles{ 
+    position:absolute;
+    left:40%;
+}

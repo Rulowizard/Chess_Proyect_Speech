@@ -469,43 +469,113 @@ handleSubmit()
 
 function detectActivate(){
   p = d3.select("#activate_status")
-  p.text("Escuchando")
+  p.text("Listening")
+  var circulo_activate = d3.select("#circle_activate")
+  circulo_activate.attr("fill","orange")
   $.get("detect_activate",function(data){
     console.log(data)
     if( data.includes("1") ){
       var circulo_activate = d3.select("#circle_activate")
       circulo_activate.attr("fill","green")
-      p = d3.select("#activate_status")
-      p.text("Desactivado")
+      p.text("Activate Detected")
       recordAudio();
     }else{
-      p = d3.select("#activate_status")
-      p.text("Desactivado")
       detectActivate()
     }
   });
 }
 
 function recordAudio(){
-  p = d3.select("#words_status")
-  p.text("Escuchando")
+  p = d3.select("#record_status")
+  p.text("Recording")
+  var circulo_record = d3.select("#circle_record")
+  circulo_record.attr("fill","orange")
   $.get("record_audio",function(data){
     console.log(data)
     if(data=="Ok"){
-      var circulo_words = d3.select("#circle_words")
-      circulo_words.attr("fill","green")
+      var circulo_record = d3.select("#circle_record")
+      circulo_record.attr("fill","green")
+      p = d3.select("#record_status")
+      p.text("Recorded")
       detectWords()
     }
   });
 }
 
 function detectWords(){
+  p = d3.select("#words_status")
+  p.text("Processing")
+  var circulo_words = d3.select("#circle_words")
+  circulo_words.attr("fill","orange")
   
   $.get("detect_words",function(data){
     console.log(data)
+    //Creo los paneles de esta seccion
 
+    if( data[0]=="NOK" || data.length==0 ){
+      var circulo_words = d3.select("#circle_words")
+      circulo_words.attr("fill","red")
+      p = d3.select("#words_status")
+      p.text("No valid Movement")
+      recordAudio()
+    } else{
+      p.text("Movements Generated")
+      var circulo_words = d3.select("#circle_words")
+      circulo_words.attr("fill","green")
+
+      for( i=0; i<data.length; i++ ){
+        var paneles = d3.select("#movements").append("div").attr("class","panel panel-default")
+        var body = paneles.append("div").attr("class","panel-body").attr("id","panel-body"+"-"+String(i)+"-"+data[i])
+        var rows = body.append("div").attr("class","row")
+        var text = rows.append("h3").attr("class","h-paneles")
+        text.text("Movimiento: " + data[i] )
+      }
+
+      //Obtengo una lista de todos los paneles
+      var list_panels = document.getElementsByClassName("panel-body");
+
+      //A todos los paneles les agrego un event listener
+      for (var i = 0; i < list_panels.length; i++) {
+          list_panels[i].addEventListener('click', panelClick, false);
+      }
+
+
+    }
   });
   
+}
+
+
+function panelClick(){
+  var movement = this.id.split("-")[3]
+  console.log(movement)
+  //El movimiento lo tengo que pasar al arreglo global de clicks
+  movement = movement.split("")
+  console.log(movement)
+  clicks[0]=movement[0]+movement[1]
+  clicks[1]=movement[2]+movement[3]
+  
+
+  var paneles = document.getElementById("movements")
+  paneles.innerHTML="";
+
+  var circulo_record = d3.select("#circle_record")
+  circulo_record.attr("fill","gray")
+  var circulo_activate = d3.select("#circle_activate")
+  circulo_activate.attr("fill","gray")
+  var circulo_words = d3.select("#circle_words")
+  circulo_words.attr("fill","gray")
+
+  p_act = d3.select("#activate_status")
+  p_act.text("N/A")
+  p_record = d3.select("#record_status")
+  p_record.text("N/A")
+  p_word = d3.select("#word_status")
+  p_word.text("N/A")
+
+  //llamo a la función game
+  game()
+
 }
 
 

@@ -51,7 +51,8 @@ from keras.optimizers import Adam
 model_act = load_model('./models/tr_model.h5')
 model_m = load_model('./models/move_trained_model_3.h5')
 model_1 = load_model('./models/one_trained_model_3.h5')
-models = [model_m, model_1]
+model_a = load_model('./models/a_trained_model_5.h5')
+models = [model_m, model_1, model_a]
 
 
 timeout = time.time() + 4  # 4s from now
@@ -475,7 +476,6 @@ def detect_words():
             i=i+1
         
         movements_a = list( set(get_movements(a,"a")))
-        print(movements_a)
         movements_b = list( set(get_movements(b,"b")))
         movements_c = list( set(get_movements(c,"c")))
         movements_d = list( set(get_movements(d,"d")))
@@ -494,7 +494,7 @@ def detect_words():
 
         unique_movements = [ele for ele in unique_movements if ele in legal_moves_uci ]
             
-        result=[ unique_movements]
+        result= unique_movements
     else:
         result=["NOK"]
 
